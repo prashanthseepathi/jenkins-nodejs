@@ -1,18 +1,18 @@
 pipeline {
     agent any 
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('valaxy-dockerhub')
+    DOCKERHUB_CREDENTIALS = credentials('docker-hub-prashanth')
     }
     stages { 
         stage('SCM Checkout') {
             steps{
-            git 'https://github.com/ravdy/nodejs-demo.git'
+            git 'https://github.com/prashanthseepathi/jenkins-nodejs.git'
             }
         }
 
         stage('Build docker image') {
             steps {  
-                sh 'docker build -t valaxy/nodeapp:$BUILD_NUMBER .'
+                sh 'docker build -t prashanth049/nodeapp:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push valaxy/nodeapp:$BUILD_NUMBER'
+                sh 'docker push prashanth049/nodeapp:$BUILD_NUMBER'
             }
         }
 }
